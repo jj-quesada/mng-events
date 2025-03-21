@@ -7,8 +7,7 @@
   
 <script setup lang="ts">
 import Sidebar from "@/components/SidebarComponent.vue";
-import { useAuthStore } from "@/stores/auth";
-import { onMounted, ref } from "vue";
+import { ref } from "vue";
 
     var lingangu = ref<string>("");
 
@@ -16,11 +15,6 @@ import { onMounted, ref } from "vue";
         lingangu.value = "lingan guliguliguli wacha linganguuu linganguu"
     }
 
-    onMounted(() => {
-        const userStore = useAuthStore();
-        userStore.signIn('jj.quesadaacosta@hotmail.com', 'jotajota')
-        console.log(userStore.user)
-    });
 
 </script>
 
