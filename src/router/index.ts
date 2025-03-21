@@ -5,7 +5,7 @@ const routes: Array<RouteRecordRaw> = [
     path: "/",
     name: "login",
     component: () =>
-      import("../views/LoginView.vue")
+      import("../views/LoginView.vue"),
     meta: { hasSidebar: false }
   },
   {
