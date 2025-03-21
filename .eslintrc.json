@@ -1,0 +1,29 @@
+{
+    "env": {
+      "browser": true,
+      "es2021": true
+    },
+    "extends": [
+      "eslint:recommended",
+      "plugin:vue/vue3-recommended",
+      "@vue/typescript/recommended"
+    ],
+    "globals": {
+      "defineProps": "readonly",
+      "defineEmits": "readonly",
+      "defineExpose": "readonly",
+      "withDefaults": "readonly"
+    },
+    "rules": {
+      // aquí puedes añadir tus reglas personalizadas
+      "indent": "off",               // desactiva indentación
+      "quotes": "off",               // desactiva comillas simples/dobles
+      "semi": "off",                 // desactiva uso obligatorio de punto y coma
+      "no-trailing-spaces": "off",   // desactiva espacios al final de línea
+      "vue/html-indent": "off",      // desactiva indentación en templates de Vue
+      "vue/max-attributes-per-line": "off",  // desactiva límite de atributos por línea
+      "vue/singleline-html-element-content-newline": "off", // evita saltos de línea molestos en HTML
+      "vue/html-self-closing": "off",
+      "vue/html-closing-bracket-newline": "off"
+    }
+  }
