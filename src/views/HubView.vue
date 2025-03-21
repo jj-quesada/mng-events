@@ -1,20 +1,13 @@
 <template>
-    <main class="hub">
-        <Sidebar msg="Mi nombre" @eventCreated="handleEventCreated"></Sidebar>
-        <p class="text-output">{{ lingangu }}</p>
+    <main class="hubView">
+        <HubContainer></HubContainer>
     </main>
 </template>
   
 <script setup lang="ts">
-import Sidebar from "@/components/SidebarComponent.vue";
+import HubContainer from "@/containers/HubContainer.vue";
 import { useAuthStore } from "@/stores/auth";
-import { onMounted, ref } from "vue";
-
-    var lingangu = ref<string>("");
-
-    function handleEventCreated(): void {
-        lingangu.value = "lingan guliguliguli wacha linganguuu linganguu"
-    }
+import { onMounted } from "vue";
 
     onMounted(() => {
         const userStore = useAuthStore();
@@ -26,7 +19,7 @@ import { onMounted, ref } from "vue";
 
 <style lang="css" scoped>
 
-    .hub {
+    .hubView {
         display: flex;
     }
 
