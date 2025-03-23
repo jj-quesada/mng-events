@@ -13,6 +13,12 @@ const routes: Array<RouteRecordRaw> = [
     component: () =>
       import("../views/HubView.vue"),
   },
+  {
+    path: "/register",
+    name: "register",
+    component: () =>
+        import("../views/RegisterView.vue"),
+  },
 ];
 
 const router = createRouter({
