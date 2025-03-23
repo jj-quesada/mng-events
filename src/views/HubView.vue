@@ -5,6 +5,7 @@
 </template>
   
 <script setup lang="ts">
+import HubComponent from "@/components/HubComponent.vue";
 import HubContainer from "@/containers/HubContainer.vue";
 import { useAuthStore } from "@/stores/auth";
 import { onMounted } from "vue";
@@ -15,6 +16,7 @@ import { onMounted } from "vue";
 
     .hubView {
         display: flex;
+        width: 100%;
     }
 
     .text-output {
