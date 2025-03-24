@@ -18,7 +18,7 @@ const routes: Array<RouteRecordRaw> = [
     name: "register",
     component: () =>
         import("../views/RegisterView.vue"),
-  },
+  }
 ];
 
 const router = createRouter({

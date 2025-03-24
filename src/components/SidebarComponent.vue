@@ -4,21 +4,21 @@
             <img class="user-icon" src="@/assets/imagen_de_perfil.png" />
             <span class="user-name">{{ msg }}</span>
         </section>
-        <button class="event-button" @click="eventCreated">Crear evento</button>
+        <button class="event-button" @click="goToAnotherPage">Crear evento</button>
     </main>
 </template>
 
 <script setup lang="ts">
 import { defineEmits, defineProps } from 'vue';
 
-    const emit = defineEmits(['eventCreated']);
+    const emit = defineEmits(['goToEventCreation']);
 
     const props = defineProps<{
         msg: string
     }>()
 
-    function eventCreated(): void {
-        emit('eventCreated');
+    function goToAnotherPage(): void {
+        emit('goToEventCreation');
     }
 
 </script>
