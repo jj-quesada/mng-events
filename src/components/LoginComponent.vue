@@ -118,6 +118,7 @@ function loginSubmitted(): void {
 
     .submit-button:hover {
         background-color: var(--accent-two);
+        color: var(--third-color);
     }
 
     .error-banner {
