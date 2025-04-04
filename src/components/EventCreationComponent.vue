@@ -4,59 +4,48 @@
             <form class="form">
                 <h1 class="title">Create your event!</h1>
 
-                <input
+                <v-text-field
                     v-model="eventName"
                     label="Event Name"
                     class="field name-field"
                     placeholder="Event Name"
                 />
 
-                <input
+                <v-text-field
                     v-model="maximumAttendees"
                     label="Maximum Attendees"
                     class="field maxAtt-field"
                     placeholder="Maximum Attendees"
                 />
 
-                <textarea
+                <v-textarea
                     v-model="description"
                     label="Description"
                     class="field description-field"
-                    placeholder="Description"
                 />
 
-                <input
+                <v-text-field
                     v-model="price"
                     label="Price"
                     class="field price-field"
                     placeholder="Price"
                 />
-                <section class="datetime-content">
-                    <input
-                        v-model="date"
-                        label="Date"
-                        type="date"
-                        class="field date-field"
-                    />
-    
-                    <input
-                        v-model="time"
-                        label="Time"
-                        type="time"
-                        class="field time-field"
-                    />
 
-                </section>
+                <v-text-field
+                    v-model="date"
+                    type="date"
+                ></v-text-field>
 
-                <section class="privacy-content">
-                    <label>Is the event private?</label>
-                    <input
-                        v-model="privateEvent"
-                        label="Private"
-                        type="checkbox"
-                        class="privacy-field"
-                    />
-                </section>
+                <v-text-field
+                    v-model="time"
+                    type="time"
+                ></v-text-field>
+                
+                <v-switch
+                    v-model="privateEvent"
+                    label="Private Event"
+                    class="privacy-field"
+                />
 
                 <button 
                     class="submit-button" 
@@ -72,11 +61,12 @@
   
 <script setup lang="ts">
 import { ref } from 'vue';
+import { VDateInput } from 'vuetify/labs/VDateInput'
 
     const eventName = ref<string>('');
     const maximumAttendees = ref<string>('');
     const description = ref<string>('');
-    const date = ref<string>('');
+    const date = ref<Date>('');
     const time = ref<string>('');
     const price = ref<string>('');
     const privateEvent = ref<boolean>(false);
@@ -113,27 +103,16 @@ import { ref } from 'vue';
     }
 
     .title {
-        color: var(--third-color);
+        color: var(--first-color);
         align-self: center;
 
         position: relative;
         bottom: 9px;
 
-        background-color: var(--second-color);
-        padding: 10px;
-        border-radius: 10px;
-        box-shadow: 1px 2px 5px rgba(0, 0, 0, .7);
     }
 
     .field {
-        color: var(--third-color);
-        opacity: .95;
-
-        background-color: var(--first-color);
-        border-radius: 5px;
-
-        padding: 6px;
-        box-shadow: 1px 2px 5px rgba(0, 0, 0, .7);
+        color: var(--first-color);
     }
 
     .field::placeholder {
@@ -142,24 +121,6 @@ import { ref } from 'vue';
 
     .description-field {
         height: 15em;
-    }
-
-    .datetime-content {
-        display: flex;
-        gap: 5px;
-
-    }
-
-    .date-field, .time-field {
-        width: 50%;
-        color: var(--third-color);
-        appearance: none;
-    }
-
-    .privacy-content {
-        display: flex;
-        gap: 5px;
-        color: var(--first-color);
     }
 
     .submit-button {
