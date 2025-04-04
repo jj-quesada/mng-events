@@ -88,7 +88,8 @@ function loginSubmitted(): void {
     .login-text {
         font-size: 1.5em;
         font-weight: 700;
-        margin: 1em 0;
+        margin: 0.5em 0 1em 0;
+        color: var(--first-color);
     }
 
     .form{
@@ -101,22 +102,22 @@ function loginSubmitted(): void {
 
     .username-field, .password-field {
         width: 80%;
-        margin: 1em 0;
+        margin: 0.5em 0;
     }
 
     .submit-button {
         width: 80%;
         height: 3em;
         margin: 1em 0;
-        border: 1px solid #808080;
         border-radius: 5px;
-        background-color: #f5f5f5;
+        background-color: var(--accent-one);
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        color: var(--first-color);
         font-weight: 600;
     }
 
     .submit-button:hover {
-        background-color: #918e8e;
+        background-color: var(--accent-two);
     }
 
     .error-banner {
@@ -124,18 +125,20 @@ function loginSubmitted(): void {
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: #f5f5f5;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: var(--third-color);
         color: red;
         font-weight: 600;
     }
 
     .register-text {
+        color: var(--first-color);
         margin-top: 2em;
         font-weight: 600;
     }
 
     .register-link {
-        color: #007bff;
+        color: var(--accent-one);
         text-decoration: none;
     }
 
