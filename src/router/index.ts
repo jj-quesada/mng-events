@@ -1,31 +1,28 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
+import HomeView from "../views/HomeView.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
-    name: "login",
-    component: () =>
-      import("../views/LoginView.vue"),
-    meta: { hasSidebar: false }
+    name: "home",
+    component: HomeView,
   },
   {
     path: "/hub",
     name: "hub",
     component: () =>
       import("../views/HubView.vue"),
-    meta: { hasSidebar: true }
   },
   {
-    path: "/eventCreation",
-    name: "eventCreation",
+    path: "/register",
+    name: "register",
     component: () =>
-      import("../views/EventCreationView.vue"),
-    meta: { hasSidebar: false }
+        import("../views/RegisterView.vue"),
   }
 ];
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes,
 });
 
