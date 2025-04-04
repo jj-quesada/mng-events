@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main class="registerViewMain">
     <RegisterContainer/>
   </main>
 </template>
@@ -10,5 +10,4 @@ import RegisterContainer from "@/containers/RegisterContainer.vue";
 </script>
 
 <style lang="css" scoped>
-
 </style>

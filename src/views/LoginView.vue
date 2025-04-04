@@ -1,5 +1,5 @@
 <template>
-    <main class="main-view">
+    <main class="loginViewMain">
         <LoginContainer />
     </main>
 </template>
@@ -10,12 +10,4 @@ import LoginContainer from '@/containers/LoginContainer.vue';
 </script>
 
 <style scoped lang="css">
-.main-view {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-color: #f5f5f5;
-}
 </style>

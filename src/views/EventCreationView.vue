@@ -10,5 +10,4 @@ import EventCreationContainer from '@/containers/EventCreationContainer.vue';
 </script>
 
 <style lang="css" scoped>
-
 </style>

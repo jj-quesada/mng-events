@@ -5,7 +5,7 @@
   </nav> -->
   <main class="main">
     <Sidebar v-if="showSidebar" @goToEventCreation="goToEventCreation" msg="Mi nombre"></Sidebar>
-    <router-view />
+    <router-view class="main-content" :class="{ 'main-content-without-sidebar': !showSidebar }" />
   </main>
 </template>
 
@@ -25,22 +25,19 @@ import { computed } from 'vue';
 </script>
 
 <style>
-
-html {
-  background-image: url('@/assets/birds.jpg');
-  background-repeat: repeat;
-  background-size: auto;
-}
-
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
 .main {
-  display: flex;
+  display: grid;
+  grid-template-columns: 15em 1fr;
+  
+}
 
+.main-content {
+  grid-column: 2;
+}
+
+.main-content-without-sidebar {
+  grid-column-start: 1;
+  grid-column-end: 3;
 }
 
 </style>

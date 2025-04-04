@@ -26,14 +26,18 @@ import { defineEmits, defineProps } from 'vue';
 <style scoped lang="css">
     .sidebar {
         width: 15em;
-        height: 100vh;
-        background-color: #2c3e50;
+        height: 99vh;
+        box-shadow: 4px 0px 10px rgba(0, 0, 0, 0.5);
+        border-radius: 12px;
+        background-color: var(--second-color);
         color: white;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
 
-        box-shadow: 4px 0px 10px rgba(0, 0, 0, 0.5);
+        margin: 5px 0px 0px 10px;
+        position: fixed
+
     }
 
     .user {
@@ -42,7 +46,8 @@ import { defineEmits, defineProps } from 'vue';
         gap: 10px;
         padding: 1em;
 
-        background-color: #212e41;
+        background-color: var(--first-color);
+        border-radius: 12px 12px 0px 0px;
     }
 
     .user-icon {
@@ -56,7 +61,7 @@ import { defineEmits, defineProps } from 'vue';
     }
 
     .event-button {
-        background-color: #3498db;
+        background-color: var(--accent-one);
         color: white;
         border: none;
         padding: 10px 20px;
@@ -65,11 +70,11 @@ import { defineEmits, defineProps } from 'vue';
         box-shadow: 4px 4px 10px rgba(0, 0, 0, 1);
 
         margin: 1em;
+        margin-bottom: 1.5em;
     }
 
     .event-button:hover {
-        background-color: #2980b9;
-        box-shadow: none;
+        background-color: var(--accent-two);
     }
 
 </style>

@@ -1,29 +1,36 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
-import HomeView from "../views/HomeView.vue";
+import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import LoginView from "@/views/LoginView.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
-    name: "home",
-    component: HomeView,
+    name: "login",
+    component: LoginView,
+    meta: { hasSidebar: false },
   },
   {
     path: "/hub",
     name: "hub",
-    component: () =>
-      import("../views/HubView.vue"),
+    component: () => import("../views/HubView.vue"),
+    meta: { hasSidebar: true },
   },
   {
     path: "/register",
     name: "register",
-    component: () =>
-        import("../views/RegisterView.vue"),
+    component: () => import("../views/RegisterView.vue"),
+    meta: { hasSidebar: false },
+  },
+  {
+    path: "/eventCreation",
+    name: "eventCreation",
+    component: () => import("../views/EventCreationView.vue"),
+    meta: { hasSidebar: false },
   }
 ];
 
 const router = createRouter({
-  history: createWebHashHistory(),
-  routes,
-});
+  history: createWebHistory(process.env.BASE_URL),
+  routes
+})
 
 export default router;

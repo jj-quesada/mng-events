@@ -1,40 +1,46 @@
 <template>
-    <section class="login">
-        <h1 class="login-text">Log In to MNG Events</h1>
-        <v-form class="form">
+    <main class="login-container">
+        <article class="background">
+            <section class="login">
+                <h1 class="login-text">Log In to MNG Events</h1>
+                <v-form class="form">
 
-            <v-banner v-if="errorMessage" class="error-banner">
-                {{ errorMessage }}
-            </v-banner>
+                    <v-banner v-if="errorMessage" class="error-banner">
+                        {{ errorMessage }}
+                    </v-banner>
 
-            <v-text-field
-                v-model="username"
-                label="Username"
-                class="username-field"
-            ></v-text-field>
+                    <v-text-field
+                        v-model="username"
+                        label="Username"
+                        class="username-field"
+                    ></v-text-field>
 
-            <v-text-field
-                v-model="password"
-                type="password"
-                label="Password"
-                class="password-field"
-            ></v-text-field>
+                    <v-text-field
+                        v-model="password"
+                        type="password"
+                        label="Password"
+                        class="password-field"
+                    ></v-text-field>
 
+                    <button 
+                        class="submit-button" 
+                        type="submit" 
+                        @click.prevent="loginSubmitted"
+                    >
+                        Log In
+                    </button >
+                </v-form>
 
+                <span class="register-text">
+                    Don't have an account? 
+                    <router-link to="/register" class="register-link">Register</router-link>
+                </span>
 
-            <button 
-                class="submit-button" 
-                type="submit" 
-                @click.prevent="loginSubmitted"
-            >
-                Log In
-            </button >
-        </v-form>
-    </section>
-    <span class="register-text">
-        Don't have an account? 
-        <router-link to="/register" class="register-link">Register</router-link>
-    </span>
+            </section>
+        </article>
+        
+    </main>
+    
 </template>
 
 <script setup lang="ts">
@@ -55,6 +61,18 @@ function loginSubmitted(): void {
 </script>
 
 <style scoped lang="css">
+
+    .login-container {
+        width: 100vw;
+    }
+
+    .background {
+        padding-top: 5em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
     .login {
         display: flex;
         flex-direction: column;
@@ -62,7 +80,7 @@ function loginSubmitted(): void {
         justify-content: center;
         height: 35em;
         width: 30em;
-        background-color: #f5f5f5;
+        background-color: var(--third-color);
         border-radius: 5px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }

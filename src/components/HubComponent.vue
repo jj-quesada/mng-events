@@ -43,21 +43,16 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="css">
 .event-hub {
   width: 100%;
   padding: 16px;
-  padding-bottom: 5%;
-  padding-top: 1%;
-  margin-left: 2%;
-  margin-right: 2%;
-
-  padding: 16px;
+  padding-bottom: 0;
   border: 1px solid #ccc;
   border-radius: 8px;
-  margin-bottom: 8px;
-  background-color: rgb(155, 155, 155);
   background-color: #2c3e50;
+
+  margin: 5px 10px 4px 25px;
 }
 
 .title {

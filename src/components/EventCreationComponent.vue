@@ -93,15 +93,15 @@ import { ref } from 'vue';
     }
 
     .background {
-        padding: 5em 10em 10em 10em;
+        padding-top: 5em;
         display: flex;
         justify-content: center;
         align-items: center;
     }
 
     .form {
-        background-color: #b2b6b9;
-        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+        background-color: var(--third-color);
+        box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.5);
         border-radius: 6px;
         display: flex;
         flex-direction: column;
@@ -113,22 +113,31 @@ import { ref } from 'vue';
     }
 
     .title {
-        color: rgb(0, 0, 0);
+        color: var(--third-color);
         align-self: center;
 
         position: relative;
         bottom: 9px;
 
+        background-color: var(--second-color);
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 1px 2px 5px rgba(0, 0, 0, .7);
     }
 
     .field {
-        color: white;
-        background-color: #154261;
-        border: 1px solid #000000;
+        color: var(--third-color);
+        opacity: .95;
+
+        background-color: var(--first-color);
         border-radius: 5px;
 
         padding: 6px;
         box-shadow: 1px 2px 5px rgba(0, 0, 0, .7);
+    }
+
+    .field::placeholder {
+        color: var(--third-color);
     }
 
     .description-field {
@@ -143,17 +152,20 @@ import { ref } from 'vue';
 
     .date-field, .time-field {
         width: 50%;
+        color: var(--third-color);
+        appearance: none;
     }
 
     .privacy-content {
         display: flex;
         gap: 5px;
+        color: var(--first-color);
     }
 
     .submit-button {
         align-self: self-end;
-        background-color: #3498db;
-        color: white;
+        background-color: var(--accent-one);
+        color: var(--third-color);
         border: none;
         padding: 10px 20px;
         cursor: pointer;
@@ -163,8 +175,7 @@ import { ref } from 'vue';
     }
 
     .submit-button:hover {
-        background-color: #2980b9;
-        box-shadow: none;
+        background-color: var(--accent-two);
     }
 
 </style>

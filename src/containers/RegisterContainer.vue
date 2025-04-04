@@ -9,7 +9,7 @@
       <div class="login-link-container">
             <span class="text"
             >Already a member?
-              <a href="#" class="text login-link">Login Now</a>
+              <router-link to="/" class="text login-link">Login Now</router-link>
             </span>
       </div>
     </div>
@@ -21,20 +21,12 @@
 </script>
 
 <style scoped lang="css">
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-  }
   .register-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-color: #4070f4; /* Color de fondo */
   }
   .form-container {
     /* border: 2px solid #a30000; Color del borde */
