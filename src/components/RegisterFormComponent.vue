@@ -21,6 +21,12 @@
       <v-date-picker
           v-model="selectedDate"
           @update:model-value="updateDate"
+          :type="'date'"
+          :header-date-icon="mdiCalendarOutline"
+          :year-icon="mdiCalendar"
+          :month-icon="mdiCalendarMonth"
+          :prev-icon="mdiChevronLeft"
+          :next-icon="mdiChevronRight"
       ></v-date-picker>
     </v-menu>
 
@@ -80,21 +86,30 @@
         :value="true"
     ></v-checkbox>
 
-    <v-btn
-        class="me-4-register"
-        type="submit"
-    >
-      register now
-    </v-btn>
+    <div class="input-buttons">
+      <button
+          class="login-button"
+          type="submit"
+      >
+        Register Now
+      </button>
 
-    <v-btn class="me-4-clear" @click="handleReset">
-      clear fields
-    </v-btn>
+      <button class="login-button" @click="handleReset">
+        Clear Fields
+      </button>
+    </div>
   </form>
 </template>
 
 <script setup lang="ts">
 import {computed, ref} from 'vue'
+import {
+  mdiCalendar,
+  mdiChevronLeft,
+  mdiChevronRight,
+  mdiCalendarOutline,
+  mdiCalendarMonth
+} from '@mdi/js'
 import {useField, useForm} from 'vee-validate'
 import countriesData from '@/assets/countries.json'
 import statesData from '@/assets/states.json'
@@ -222,32 +237,46 @@ const submit = handleSubmit(values => {
 </script>
 
 <style scoped lang="css">
-.me-4-register, .me-4-clear {
-  border: none;
-  color: white;
-  font-size: 17px;
-  font-weight: 500;
-  letter-spacing: 1px;
-  border-radius: 6px;
-  background-color: #4070f4;
-  cursor: pointer;
+.login-button {
+  width: 80%;
+  height: 3em;
+  margin: 1em 0;
+  border: 1px solid #808080;
+  border-radius: 5px;
+  background-color: #f5f5f5;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-weight: 600;
 }
 
-.register-form-container button {
-  margin-top: 10px;
-  border: none;
-  color: #fff;
-  font-size: 17px;
-  font-weight: 500;
-  letter-spacing: 1px;
-  border-radius: 6px;
-  background-color: #4070f4;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin-left: 10px;
+.login-button:hover {
+  background-color: #918e8e;
 }
 
-.register-form-container button input:hover {
-  background-color: #265df2;
+.input-field {
+  width: 80%;
+  padding: 2px;
+}
+
+.v-menu .input-field {
+  width: 100%;
+}
+
+.v-text-field {
+  width: 100%;
+}
+
+.register-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3px;
+  width: 80%;
+  gap: 1em; /* Adjust the gap value as needed */
 }
 </style>
