@@ -45,6 +45,14 @@
         label="Email"
     ></v-text-field>
 
+    <v-text-field
+        v-model="password.value.value"
+        class="input-field"
+        :error-messages="password.errorMessage.value"
+        label="Password"
+        type="password"
+    ></v-text-field>
+
     <v-select
         v-model="country.value.value"
         class="input-field"
@@ -156,6 +164,11 @@ const {handleSubmit, handleReset} = useForm({
     birthday(value: string) {
       return /^\d{4}-\d{2}-\d{2}$/.test(value) || 'Must be a valid date (YYYY-MM-DD).'
     },
+    password(value: string) {
+      if (value?.length >= 6) return true
+
+      return 'Password needs to be at least 6 characters.'
+    },
     phone(value: string) {
       if (/^[0-9-]{9}$/.test(value)) return true
 
@@ -182,7 +195,7 @@ const {handleSubmit, handleReset} = useForm({
       return 'Select a city.'
     },
     checkbox(value: boolean) {
-      if (value === true) return true
+      if (value) return true
 
       return 'You must select this box to register.'
     },
@@ -193,6 +206,7 @@ const name = useField<string>('name')
 const birthday = useField<string>('birthday')
 const phone = useField<string>('phone')
 const email = useField<string>('email')
+const password = useField<string>('password')
 const country = useField<string>('country')
 const province = useField<string>('province')
 const city = useField<string>('city')
