@@ -32,7 +32,7 @@
     /* border: 2px solid #a30000; Color del borde */
     padding: 20px; /* Relleno del contenedor */
     border-radius: 10px; /* Bordes redondeados */
-    background-color: #ffffff; /* Color de fondo */
+    background-color: #f4edea; /* Color de fondo */
   }
   .login-link-container {
     display: flex;
