@@ -31,29 +31,39 @@
                     placeholder="Price"
                 />
 
-                <v-text-field
-                    v-model="date"
-                    type="date"
-                ></v-text-field>
+                <section class="date-time">
+                    <v-text-field
+                        v-model="date"
+                        type="date"
+                    ></v-text-field>
+    
+                    <v-text-field
+                        v-model="time"
+                        type="time"
+                    ></v-text-field>
+                </section>
 
-                <v-text-field
-                    v-model="time"
-                    type="time"
-                ></v-text-field>
-                
-                <v-switch
-                    v-model="privateEvent"
-                    label="Private Event"
-                    class="privacy-field"
+                <v-file-input
+                    v-model="imageFile"
+                    label="upload-image"
                 />
-
-                <button 
-                    class="submit-button" 
-                    type="submit" 
-                    @click="eventSubmitted"
-                >
-                    Create event
-                </button >
+                
+                <section class="final-section">
+                    <v-switch
+                        v-model="privateEvent"
+                        label="Private Event"
+                        class="privacy-field"
+                        color="green"
+                    />
+    
+                    <button 
+                        class="submit-button" 
+                        type="submit" 
+                        @click="eventSubmitted"
+                    >
+                        Create event
+                    </button >
+                </section>
             </form>
         </article>
     </main>
@@ -61,18 +71,19 @@
   
 <script setup lang="ts">
 import { ref } from 'vue';
-import { VDateInput } from 'vuetify/labs/VDateInput'
 
     const eventName = ref<string>('');
     const maximumAttendees = ref<string>('');
     const description = ref<string>('');
-    const date = ref<Date>('');
+    const date = ref<string>('');
     const time = ref<string>('');
     const price = ref<string>('');
     const privateEvent = ref<boolean>(false);
+    
+    const imageFile = ref<File | null>(null);
 
     function eventSubmitted(): void {
-        console.log('event created')
+        console.log('event created', {eventName: eventName.value})
     }
 
 </script>
@@ -83,7 +94,7 @@ import { VDateInput } from 'vuetify/labs/VDateInput'
     }
 
     .background {
-        padding-top: 5em;
+        padding: 5em 0 5em 0;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -96,8 +107,8 @@ import { VDateInput } from 'vuetify/labs/VDateInput'
         display: flex;
         flex-direction: column;
 
-        gap: 1em;
-        padding: 2em;
+        gap: .5em;
+        padding: 2em 2em 0 2em;
         width: 50vw;
 
     }
@@ -123,13 +134,26 @@ import { VDateInput } from 'vuetify/labs/VDateInput'
         height: 15em;
     }
 
+    .date-time {
+        display: flex;
+        gap: 1em;
+
+    }
+
+    .final-section {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+
     .submit-button {
-        align-self: self-end;
         background-color: var(--accent-one);
         color: var(--third-color);
         border: none;
+
+        height: 3em;
+
         padding: 10px 20px;
-        cursor: pointer;
         border-radius: 5px;
         box-shadow: 4px 4px 5px rgba(0, 0, 0, .7);
 
