@@ -68,7 +68,7 @@
         </article>
     </main>
 </template>
-  
+
 <script setup lang="ts">
 import { ref } from 'vue';
 
@@ -84,8 +84,9 @@ import { ref } from 'vue';
 
     function eventSubmitted(): void {
         console.log('event created', {eventName: eventName.value})
-    }
 
+    }
+  
 </script>
 
 <style scoped lang="css">
@@ -162,5 +163,4 @@ import { ref } from 'vue';
     .submit-button:hover {
         background-color: var(--accent-two);
     }
-
 </style>
