@@ -7,5 +7,5 @@ export interface Event {
     dateTime: Date,
     price: number,
     privateEvent: boolean,
-    imageFile: File | string | undefined
+    imageFile: string | undefined
 }
