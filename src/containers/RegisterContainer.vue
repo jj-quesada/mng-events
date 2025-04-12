@@ -43,13 +43,15 @@ const handleSignUp = async (data: { authUser: AuthUser, password: string, userPr
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+
+    height: 70em;
   }
   .form-container {
     /* border: 2px solid #a30000; Color del borde */
     padding: 20px; /* Relleno del contenedor */
     border-radius: 10px; /* Bordes redondeados */
     background-color: #f4edea; /* Color de fondo */
+
   }
   .login-link-container {
     display: flex;

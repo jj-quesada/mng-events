@@ -1,18 +1,22 @@
 <template>
   <div class="event-hub">
-    <h1 class="title">Event Hub</h1>
-    
-    <!-- Lista de eventos -->
-    <div class="title">
+    <div class="title-container">
+      <h1 class="title">Event Hub</h1>
       <h2 class="subtitle">Upcoming Events</h2>
-      <div v-if="events.length > 0">
-        <router-link v-for="(event, index) in events" :key="index" to="event.image" class="event-card">
+    </div>
+    
+    <div class="all-events">
+      <div class="events" v-if="events.length > 0">
+        <router-link v-for="(event, index) in events" :key="index" :to="{ name: 'event-details', params: { id: event.id },  }" class="event-card">
           <div class="event-info">
-              <img :src="event.image" alt="Event Image" class="event-image" />
+              <img :src="event.imageFile" alt="Event Image" class="event-image" />
               <div>
-                  <h3 class="event-title">{{ event.name }}</h3>
-                  <p class="event-description">{{ event.description }}</p>
-                  <p class="event-date">{{ event.date }}</p>
+                <h3 class="event-title">{{ event.name }}</h3>
+                <p class="event-description">{{ event.description }}</p>
+                <p class="event-location">{{ event.location }}</p> 
+                <p class="event-date">{{ event.dateTime }}</p>
+                <p v-if="event.price > 0" class="event-price">{{ event.price }} €</p>
+                <p v-else class="event-price">FREE</p>
               </div>
           </div>
         </router-link>
@@ -22,51 +26,61 @@
   </div>
 </template>
 
-<script>
-import { ref } from 'vue';
-import logo from '@/assets/logo.png';
+<script setup lang="ts">
+import { Event } from '@/interfaces/event'
 
-export default {
-  setup() {
-    const events = ref([
-      { name: 'Vue.js Conference', date: '2025-06-10', description: 'A conference for Vue.js developers.', image: logo },
-      { name: 'Hackathon 2025', date: '2025-07-15', description: '24-hour coding competition.', image: logo },
-      { name: 'Hackathon 2025', date: '2025-07-15', description: '24-hour coding competition.', image: logo },
-      { name: 'Hackathon 2025', date: '2025-07-15', description: '24-hour coding competition.', image: logo },
-      { name: 'Hackathon 2025', date: '2025-07-15', description: '24-hour coding competition.', image: logo },
-      { name: 'Hackathon 2025', date: '2025-07-15', description: '24-hour coding competition.', image: logo },
-      { name: 'Hackathon 2025', date: '2025-07-15', description: '24-hour coding competition.', image: logo },
-    ]);
+defineProps<{
+  events: Event[]
+}>()
 
-    return { events };
-  }
-};
 </script>
 
 <style scoped lang="css">
 .event-hub {
   width: 100%;
-  padding: 16px;
-  padding-bottom: 0;
-  border: 1px solid #ccc;
+  border: 2px solid var(--third-color);
   border-radius: 8px;
   background-color: #2c3e50;
 
-  margin: 5px 10px 4px 25px;
+  margin: 1em 5em 1em 5em;
+
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.9);
 }
 
-.title {
+.title-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--first-color);
+  border-radius: 8px 8px 0 0;
+
+  padding-left: 20px;
+
+  box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.5);
+}
+
+.all-events, .title {
   font-size: 3.5rem;
   font-weight: bold;
-  margin-bottom: 16px;
-  margin-top: 3px;
-  color: #ffffff;
+  color: var(--third-color);
 }
 
 .subtitle {
+  color: var(--third-color);
   font-size: 1.25rem;
   font-weight: 600;
-  margin-bottom: 8px;
+  margin-bottom: 1em;
+}
+
+.events {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 16px;
+
+  width: 100%;
+
+  padding: 20px;
 }
 
 .event-card {
@@ -76,13 +90,16 @@ export default {
   border-radius: 8px;
   margin-bottom: 8px;
   background-color: white;
-  color: #000000;
+  color: var(--first-color);
   text-decoration: none;
   transition: background-color 0.3s;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.9);
+
+  width: 100%;
 }
 
 .event-card:hover {
-  background-color: #f0f0f0;
+  background-color: #e2e1e1;
 }
 
 .event-info {
@@ -110,7 +127,7 @@ export default {
   color: gray;
 }
 
-.event-description {
+.event-description, .event-location, .event-price, .event-private {
   margin-top: 4px;
   font-size: 0.825rem;
 }

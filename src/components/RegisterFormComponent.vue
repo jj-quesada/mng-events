@@ -22,11 +22,6 @@
           v-model="selectedDate"
           @update:model-value="updateDate"
           :type="'date'"
-          :header-date-icon="mdiCalendarOutline"
-          :year-icon="mdiCalendar"
-          :month-icon="mdiCalendarMonth"
-          :prev-icon="mdiChevronLeft"
-          :next-icon="mdiChevronRight"
       ></v-date-picker>
     </v-menu>
 
@@ -110,40 +105,13 @@
 </template>
 
 <script setup lang="ts">
-import {computed, ref, defineEmits } from 'vue'
-import {
-  mdiCalendar,
-  mdiChevronLeft,
-  mdiChevronRight,
-  mdiCalendarOutline,
-  mdiCalendarMonth
-} from '@mdi/js'
+import {computed, ref} from 'vue'
 import {useField, useForm} from 'vee-validate'
 import countriesData from '@/assets/countries.json'
 import statesData from '@/assets/states.json'
 import citiesData from '@/assets/cities.json'
-import { AuthUser, UserProfile } from '@/interfaces/UserInterfaces'
+import {Country, State, City} from '@/interfaces/locations'
 
-interface Country {
-  id: string
-  name: string
-  phoneCode: string
-  emojiU: string
-  native: string
-}
-
-interface State {
-  id: string
-  name: string
-  stateCode: string
-  countryId: string
-}
-
-interface City {
-  id: string
-  name: string
-  stateId: string
-}
 
 const emit = defineEmits(['signUpSubmitted']);
 
