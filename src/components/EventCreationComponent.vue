@@ -124,7 +124,6 @@ import { Event } from '@/interfaces/event';
         };
 
         console.log('Event created', event);
-        console.log(time.value);
 
     }
   

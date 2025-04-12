@@ -75,12 +75,10 @@ defineProps<{
 
 .events {
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: 49% 49%;
+  padding: .5em;
   gap: 16px;
 
-  width: 100%;
-
-  padding: 20px;
 }
 
 .event-card {
@@ -88,14 +86,12 @@ defineProps<{
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 8px;
-  margin-bottom: 8px;
   background-color: white;
   color: var(--first-color);
   text-decoration: none;
   transition: background-color 0.3s;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.9);
 
-  width: 100%;
 }
 
 .event-card:hover {
