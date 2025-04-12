@@ -4,15 +4,17 @@
     <router-link to="/hub">Hub</router-link>
   </nav> -->
   <main class="main">
-    <Sidebar v-if="showSidebar" @goToEventCreation="goToEventCreation" msg="Mi nombre"></Sidebar>
+    <SidebarContainer v-if="showSidebar" @goToEventCreation="goToEventCreation"></SidebarContainer>
     <router-view class="main-content" :class="{ 'main-content-without-sidebar': !showSidebar }" />
   </main>
 </template>
 
 <script setup lang="ts">
 import { useRoute, useRouter } from 'vue-router';
-import Sidebar from './components/SidebarComponent.vue';
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
+import SidebarContainer from './containers/SidebarContainer.vue';
+import { useAuthStore } from './stores/auth';
+
 
   const route = useRoute();
   const showSidebar = computed(() => route.meta.hasSidebar !== false);
@@ -21,6 +23,12 @@ import { computed } from 'vue';
   function goToEventCreation(): void {
     router.push('/eventCreation');
   }
+
+  const authStore = useAuthStore();
+
+  onMounted(async () => {
+    await authStore.init();
+  });
 
 </script>
 

@@ -11,15 +11,16 @@
 <script setup lang="ts">
 import { defineEmits, defineProps } from 'vue';
 
-    const emit = defineEmits(['goToEventCreation']);
-
     const props = defineProps<{
         msg: string
     }>()
 
+    const emit = defineEmits(['goToEventCreation']);
+
     function goToAnotherPage(): void {
         emit('goToEventCreation');
     }
+
 
 </script>
   

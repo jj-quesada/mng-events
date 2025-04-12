@@ -112,6 +112,13 @@ import statesData from '@/assets/states.json'
 import citiesData from '@/assets/cities.json'
 import {Country, State, City} from '@/interfaces/locations'
 
+
+const emit = defineEmits(['signUpSubmitted']);
+
+function signUpSubmitted(authUser : AuthUser, password : string, userProfile: UserProfile) {
+  emit('signUpSubmitted', { authUser, password, userProfile })
+}
+
 const countries: Country[] = countriesData[2]?.data || []
 const states: State[] = statesData[2]?.data || []
 const cities: City[] = citiesData[2]?.data || []
@@ -213,8 +220,29 @@ function updateDate(val: Date | null) {
   menu.value = false
 }
 
+
+
 const submit = handleSubmit(values => {
-  alert(JSON.stringify(values, null, 2))
+  // Create AuthUser and UserProfile objects from the form values
+  const authUser: AuthUser = {
+    user_id: '', // Can be set when the user is created in Supabase
+    email: values.email,
+    phone: values.phone,
+  }
+
+  const birthDate = new Date(values.birthday);
+
+  const userProfile: UserProfile = {
+    user_id: '', // Can be set when the user is created in Supabase
+    username: values.name,
+    date_of_birth: birthDate,
+    country: values.country,
+    province: values.province,
+    city: values.city,
+    role: 'user', // You can adjust this based on your needs
+  }
+
+  signUpSubmitted(authUser, values.password, userProfile)
 })
 </script>
 

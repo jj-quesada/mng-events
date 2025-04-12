@@ -5,7 +5,7 @@
       <div class="line">
         <span class="text">Create your MNG Events account to access this new experience</span>
       </div>
-      <RegisterFormComponent/>
+      <RegisterFormComponent @signUpSubmitted="handleSignUp"/>
       <div class="login-link-container">
             <span class="text"
             >Already a member?
@@ -17,7 +17,24 @@
 </template>
 
 <script setup lang="ts">
-  import RegisterFormComponent from "@/components/RegisterFormComponent.vue";
+import RegisterFormComponent from "@/components/RegisterFormComponent.vue";
+import { AuthUser, UserProfile } from "@/interfaces/UserInterfaces";
+import router from "@/router";
+import { useAuthStore } from "@/stores/auth";
+
+const authStore = useAuthStore();
+
+const handleSignUp = async (data: { authUser: AuthUser, password: string, userProfile: UserProfile }) => {
+  const { authUser, password, userProfile } = data;
+  try {
+    await authStore.signUp(authUser, password, userProfile)
+    console.log("Registro exitoso");
+    router.push('/hub');
+  } catch (error) {
+    // Handle error
+    console.log("Error during sign up:", error);
+  }
+}
 </script>
 
 <style scoped lang="css">
