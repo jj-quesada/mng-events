@@ -45,7 +45,7 @@
 
                 <v-file-input
                     v-model="imageFile"
-                    label="upload-image"
+                    label="Upload an image for your event"
                 />
                 
                 <section class="final-section">
