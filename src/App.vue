@@ -11,8 +11,10 @@
 
 <script setup lang="ts">
 import { useRoute, useRouter } from 'vue-router';
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 import SidebarContainer from './containers/SidebarContainer.vue';
+import { useAuthStore } from './stores/auth';
+
 
   const route = useRoute();
   const showSidebar = computed(() => route.meta.hasSidebar !== false);
@@ -21,6 +23,12 @@ import SidebarContainer from './containers/SidebarContainer.vue';
   function goToEventCreation(): void {
     router.push('/eventCreation');
   }
+
+  const authStore = useAuthStore();
+
+  onMounted(async () => {
+    await authStore.init();
+  });
 
 </script>
 
