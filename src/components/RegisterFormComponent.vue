@@ -22,11 +22,6 @@
           v-model="selectedDate"
           @update:model-value="updateDate"
           :type="'date'"
-          :header-date-icon="mdiCalendarOutline"
-          :year-icon="mdiCalendar"
-          :month-icon="mdiCalendarMonth"
-          :prev-icon="mdiChevronLeft"
-          :next-icon="mdiChevronRight"
       ></v-date-picker>
     </v-menu>
 
@@ -111,38 +106,11 @@
 
 <script setup lang="ts">
 import {computed, ref} from 'vue'
-import {
-  mdiCalendar,
-  mdiChevronLeft,
-  mdiChevronRight,
-  mdiCalendarOutline,
-  mdiCalendarMonth
-} from '@mdi/js'
 import {useField, useForm} from 'vee-validate'
 import countriesData from '@/assets/countries.json'
 import statesData from '@/assets/states.json'
 import citiesData from '@/assets/cities.json'
-
-interface Country {
-  id: string
-  name: string
-  phoneCode: string
-  emojiU: string
-  native: string
-}
-
-interface State {
-  id: string
-  name: string
-  stateCode: string
-  countryId: string
-}
-
-interface City {
-  id: string
-  name: string
-  stateId: string
-}
+import {Country, State, City} from '@/interfaces/locations'
 
 const countries: Country[] = countriesData[2]?.data || []
 const states: State[] = statesData[2]?.data || []

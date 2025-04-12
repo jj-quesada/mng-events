@@ -28,9 +28,10 @@ import { defineEmits, defineProps } from 'vue';
         width: 15em;
         height: 99vh;
         box-shadow: 4px 0px 10px rgba(0, 0, 0, 0.5);
+        border: 2px solid var(--third-color);
         border-radius: 12px;
         background-color: var(--second-color);
-        color: white;
+        color: var(--third-color);
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -47,6 +48,7 @@ import { defineEmits, defineProps } from 'vue';
         padding: 1em;
 
         background-color: var(--first-color);
+        box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.4);
         border-radius: 12px 12px 0px 0px;
     }
 
