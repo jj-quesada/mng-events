@@ -97,7 +97,9 @@ import { Event } from '@/interfaces/event';
     
     const images = ref<File | undefined>(undefined);
 
-    function eventSubmitted(): void {
+    const emit = defineEmits(['eventCreated']);
+
+    function eventSubmitted() {
 
         if (!eventName.value || !maximumAttendees.value || !location.value || !description.value || !date.value || !time.value || !price.value) {
             console.error('Please fill in all fields');
@@ -123,7 +125,9 @@ import { Event } from '@/interfaces/event';
             imageFile: images.value
         };
 
-        console.log('Event created', event);
+      emit('eventCreated', event);
+
+      console.log('Event created', event);
 
     }
   
