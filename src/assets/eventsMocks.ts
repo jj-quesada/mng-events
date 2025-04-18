@@ -14,6 +14,7 @@ export const events : Ref<Event[]> = ref<Event[]>([
         price: 199.99,
         privateEvent: false,
         imageFile: imageFile,
+        creationDate: new Date('2025-04-10T09:00:00')
     },
     {
         id: 'bb22ee44-8899-4a7d-bb22-abcdef123456',
@@ -25,6 +26,7 @@ export const events : Ref<Event[]> = ref<Event[]>([
         price: 0,
         privateEvent: false,
         imageFile: imageFile,
+        creationDate: new Date('2025-04-10T09:00:00')
     },
     {
         id: 'ccdd7788-3344-4f1c-ccdd-fedcba654321',
@@ -36,6 +38,7 @@ export const events : Ref<Event[]> = ref<Event[]>([
         price: 49.99,
         privateEvent: true,
         imageFile: imageFile,
+        creationDate: new Date('2025-04-10T09:00:00')
     },
     {
         id: 'de98ab76-1234-4cab-98de-a1b2c3d4e5f6',
@@ -47,6 +50,7 @@ export const events : Ref<Event[]> = ref<Event[]>([
         price: 10,
         privateEvent: false,
         imageFile: imageFile,
+        creationDate: new Date('2025-04-10T09:00:00')
     },
     {
         id: 'f1e2d3c4-1111-4a2b-b3c4-abcdefabcdef',
@@ -58,6 +62,7 @@ export const events : Ref<Event[]> = ref<Event[]>([
         price: 299.99,
         privateEvent: false,
         imageFile: imageFile,
+        creationDate: new Date('2025-04-10T09:00:00')
       },
       {
         id: '123e4567-e89b-4d3a-a456-426614174000',
@@ -69,6 +74,7 @@ export const events : Ref<Event[]> = ref<Event[]>([
         price: 149.99,
         privateEvent: true,
         imageFile: imageFile,
+        creationDate: new Date('2025-04-10T09:00:00')
       },
       {
         id: '7890abcd-5678-4abc-90ef-abcdef123123',
@@ -80,6 +86,7 @@ export const events : Ref<Event[]> = ref<Event[]>([
         price: 199,
         privateEvent: false,
         imageFile: imageFile,
+        creationDate: new Date('2025-04-10T09:00:00')
       },
       {
         id: 'bada55f0-9cde-4def-a2b3-001122334455',
@@ -91,6 +98,7 @@ export const events : Ref<Event[]> = ref<Event[]>([
         price: 0,
         privateEvent: false,
         imageFile: imageFile,
+        creationDate: new Date('2025-04-10T09:00:00')
       },
       {
         id: 'deadbeef-0000-4c0d-beef-faceb00c1234',
@@ -102,6 +110,7 @@ export const events : Ref<Event[]> = ref<Event[]>([
         price: 299.99,
         privateEvent: true,
         imageFile: imageFile,
+        creationDate: new Date('2025-04-10T09:00:00')
       },
       {
         id: 'feedface-9876-4bee-cafe-babe12345678',
@@ -113,5 +122,6 @@ export const events : Ref<Event[]> = ref<Event[]>([
         price: 25,
         privateEvent: false,
         imageFile: imageFile,
+        creationDate: new Date('2025-04-10T09:00:00')
       },
 ]);
