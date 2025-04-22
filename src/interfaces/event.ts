@@ -1,12 +1,13 @@
 export interface Event {
-    id: string,
+    id?: string,
+    creationTime?: Date,
+    ownerId: string,
     name: string,
     maximumAttendees: number,
     description: string,
     location: string,
-    dateTime: Date,
+    celebrationDate: Date,
     price: number,
     privateEvent: boolean,
-    imageFile: string | undefined,
-    creationDate: Date
+    imageURL?: string
 }

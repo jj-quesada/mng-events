@@ -9,12 +9,12 @@
       <div class="events" v-if="events.length > 0">
         <router-link v-for="(event, index) in events" :key="index" :to="{ name: 'event-details', params: { id: event.id },  }" class="event-card">
           <div class="event-info">
-              <img :src="event.imageFile" alt="Event Image" class="event-image" />
+              <img :src="event.imageURL" alt="Event Image" class="event-image" />
               <div>
                 <h3 class="event-title">{{ event.name }}</h3>
                 <p class="event-description">{{ event.description }}</p>
                 <p class="event-location">{{ event.location }}</p> 
-                <p class="event-date">{{ event.dateTime }}</p>
+                <p class="event-date">{{ event.creationTime }}</p>
                 <p v-if="event.price > 0" class="event-price">{{ event.price }} €</p>
                 <p v-else class="event-price">FREE</p>
               </div>

@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import LoginView from "@/views/LoginView.vue";
 import EventDetailsComponent from "@/components/EventDetailsComponent.vue";
+import EventDetailsContainer from "@/containers/EventDetailsContainer.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -36,7 +37,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/event/:id',
     name: 'event-details',
-    component: EventDetailsComponent,
+    component: EventDetailsContainer,
     meta: { hasSidebar: false },
     props: true
   }

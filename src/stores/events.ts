@@ -21,7 +21,24 @@ export const useEventStore = defineStore('event', () => {
           .select('*');
 
       if (fetchError) throw fetchError;
-      events.value = data;
+      if (data) {
+        events.value = data.map((item: any): Event => {
+            const baseItem = {
+              id: item.id,
+              creationTime: item.creation_time,
+              ownerId: item.owner_id,
+              name: item.name,
+              maximumAttendees: item.maximum_attendees,
+              description: item.description,
+              location: item.location,
+              celebrationDate: item.celebration_date,
+              price: item.price,
+              privateEvent: item.private_event,
+              imageURL: item.image_url || undefined
+            };
+            return baseItem;
+          })
+        }
 
     } catch (err: any) {
       error.value = err.message;
@@ -53,20 +70,52 @@ export const useEventStore = defineStore('event', () => {
     }
   };
 
-  const createEvent = async (eventData: Event) => {
+  const createEvent = async (eventData: Event, image : File | undefined) => {
     loading.value = true;
     error.value = null;
 
     try {
+      var imageURL = ""
+      const filePath = `event-images/${eventData.ownerId}_${eventData.name}_${Date.now()}`;
+      console.log(filePath);
+
+      if(image) {
+        const { error: uploadError } = await supabase.storage
+        .from('event-images') 
+        .upload(filePath, image);
+  
+        if (uploadError) throw uploadError;
+
+        const { data: publicUrlData } = supabase.storage
+          .from('event-images')
+          .getPublicUrl(filePath);
+
+        imageURL = publicUrlData.publicUrl;
+      }
+
       const { error: insertError } = await supabase
           .from('events')
-          .insert([eventData]);
+          .insert([
+            {
+              creation_time: new Date().toISOString(),
+              owner_id: eventData.ownerId,
+              name: eventData.name,
+              maximum_attendees: eventData.maximumAttendees,
+              description: eventData.description,
+              location: eventData.location,
+              celebration_date: eventData.celebrationDate.toISOString(),
+              price: eventData.price,
+              private_event: eventData.privateEvent,
+              image_url: imageURL
+            }
+          ]);
 
       if (insertError) throw insertError;
       await fetchEvents(); // refresh
 
     } catch (err: any) {
       error.value = err.message;
+      throw err;
 
     } finally {
       loading.value = false;
