@@ -2,7 +2,7 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 import supabase from '@/supabase';
-import { Event } from '@/interfaces/EventInterfaces';
+import { Event } from '@/interfaces/event';
 
 export const useEventStore = defineStore('event', () => {
 

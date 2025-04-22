@@ -4,7 +4,16 @@
             <img class="user-icon" src="@/assets/imagen_de_perfil.png" />
             <span class="user-name">{{ msg }}</span>
         </section>
-        <button class="event-button" @click="goToAnotherPage">Crear evento</button>
+        <div class="buttons-container">
+          <button class="event-button" @click="goToAnotherPage">
+            <i class="mdi mdi-calendar-plus"></i>
+            Crear evento
+          </button>
+          <button class="logout-button" @click="logout">
+            <i class="mdi mdi-logout"></i>
+            Logout
+          </button>
+        </div>
     </main>
 </template>
 
@@ -21,6 +30,13 @@ import { defineEmits, defineProps } from 'vue';
         emit('goToEventCreation');
     }
 
+    function logout(): void {
+        // Implement logout logic here
+        console.log('Logout clicked');
+        // For example, you might want to clear user data or redirect to a login page
+        // window.location.href = '/login'; // Redirect to login page
+        // or use Vue Router to navigate
+    }
 
 </script>
   
@@ -40,6 +56,13 @@ import { defineEmits, defineProps } from 'vue';
         margin: 5px 0px 0px 10px;
         position: fixed
 
+    }
+
+    .buttons-container {
+      display: flex;
+      flex-direction: column; /* Alinea los botones verticalmente */
+      gap: 0.5em; /* Reduce el espacio entre los botones */
+      margin-bottom: 1em; /* Añade un margen inferior */
     }
 
     .user {
@@ -78,6 +101,22 @@ import { defineEmits, defineProps } from 'vue';
 
     .event-button:hover {
         background-color: var(--accent-two);
+    }
+
+    .logout-button {
+      background-color: #aa5555;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+      box-shadow: 4px 4px 10px rgba(0, 0, 0, 1);
+      margin: 1em;
+      margin-bottom: 1.5em;
+    }
+
+    .logout-button:hover {
+      background-color: #874a4a;
     }
 
 </style>

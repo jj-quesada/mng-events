@@ -5,6 +5,12 @@ import EventDetailsComponent from "@/components/EventDetailsComponent.vue";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
+    name: "landing",
+    component: () => import("../views/LandingView.vue"),
+    meta: { hasSidebar: false },
+  },
+  {
+    path: "/login",
     name: "login",
     component: LoginView,
     meta: { hasSidebar: false },

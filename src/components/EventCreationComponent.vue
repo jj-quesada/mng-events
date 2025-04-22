@@ -122,7 +122,7 @@ import { Event } from '@/interfaces/event';
             price: parseFloat(price.value),
             location: location.value,
             privateEvent: privateEvent.value,
-            imageFile: images.value
+            imageFile: images.value ? images.value.name : undefined
         };
 
       emit('eventCreated', event);

@@ -91,13 +91,13 @@
 
     <div class="input-buttons">
       <button
-          class="login-button"
+          class="register-button"
           type="submit"
       >
         Register Now
       </button>
 
-      <button class="login-button" @click="handleReset">
+      <button class="clear-button" @click="handleReset">
         Clear Fields
       </button>
     </div>
@@ -111,6 +111,8 @@ import countriesData from '@/assets/countries.json'
 import statesData from '@/assets/states.json'
 import citiesData from '@/assets/cities.json'
 import {Country, State, City} from '@/interfaces/locations'
+import {AuthUser} from "@supabase/supabase-js";
+import {UserProfile} from "@/interfaces/UserInterfaces";
 
 
 const emit = defineEmits(['signUpSubmitted']);
@@ -225,7 +227,7 @@ function updateDate(val: Date | null) {
 const submit = handleSubmit(values => {
   // Create AuthUser and UserProfile objects from the form values
   const authUser: AuthUser = {
-    user_id: '', // Can be set when the user is created in Supabase
+    id: '', // Can be set when the user is created in Supabase
     email: values.email,
     phone: values.phone,
   }
@@ -247,7 +249,22 @@ const submit = handleSubmit(values => {
 </script>
 
 <style scoped lang="css">
-.login-button {
+.register-button {
+  width: 80%;
+  height: 3em;
+  margin: 1em 0;
+  border: 1px solid #808080;
+  border-radius: 5px;
+  background-color: var(--accent-one);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-weight: 600;
+}
+
+.register-button:hover {
+  background-color: #18c16e;
+}
+
+.clear-button {
   width: 80%;
   height: 3em;
   margin: 1em 0;
@@ -258,7 +275,7 @@ const submit = handleSubmit(values => {
   font-weight: 600;
 }
 
-.login-button:hover {
+.clear-button:hover {
   background-color: #918e8e;
 }
 
