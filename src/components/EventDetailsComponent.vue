@@ -1,15 +1,16 @@
 <template>
     <main class="EventDetailsComponent">
         <button class='back-button' onclick="history.back()"> Volver </button>
-        <p class="event-details">{{ "Esto es el evento con id: " + id }}</p>
+        <p class="event-details">{{ "Esto es el evento con id: " + selectedEvent?.id }}</p>
     </main>
 </template>
 
 <script setup lang="ts">
+import { Event } from '@/interfaces/event';
 
-    defineProps<{
-        id: number
-    }>()
+defineProps<{
+    selectedEvent: Event | null
+}>()
     
 </script>
 
