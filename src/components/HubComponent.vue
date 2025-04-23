@@ -15,7 +15,7 @@
                 <p class="event-description">{{ event.description }}</p>
                 <p class="event-location">{{ event.location }}</p>
                 <p class="event-date">
-                  {{ new Date(event.creationTime ?? new Date()).toLocaleString('en-EN', { dateStyle: 'long', timeStyle: 'short' }) }}
+                  {{ new Date(event.celebrationDate).toLocaleString('en-EN', { dateStyle: 'long', timeStyle: 'short' }) }}
                 </p>
                 <p v-if="event.price > 0" class="event-price">{{ event.price }} €</p>
                 <p v-else class="event-price">FREE</p>
