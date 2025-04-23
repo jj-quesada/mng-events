@@ -1,6 +1,6 @@
 <template>
     <main class="EventCreationContainer">
-        <EventCreation :userId="user.id" @event-created="handleEventCreation"></EventCreation>
+        <EventCreation :userId="user.id" @event-created="handleEventCreated"></EventCreation>
     </main>
 </template>
   
@@ -17,7 +17,7 @@ const { user } = storeToRefs(auth);
 
 const eventStore = useEventStore();
 
-async function handleEventCreation(event: Event, image: File | undefined) {
+async function handleEventCreated(event: Event, image: File | undefined) {
 
     await eventStore.createEvent(event, image)
         .then(() => {
