@@ -61,7 +61,6 @@ function loginSubmitted(): void {
 </script>
 
 <style scoped lang="css">
-
     .login-container {
         width: 100vw;
     }
@@ -86,10 +85,20 @@ function loginSubmitted(): void {
     }
 
     .login-text {
-        font-size: 1.5em;
-        font-weight: 700;
-        margin: 0.5em 0 1em 0;
-        color: var(--first-color);
+      position: relative;
+      font-size: 27px;
+      font-weight: 600;
+      margin: 0.5em 0 1em 0;
+    }
+    .login-text::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 3px;
+      width: 30px;
+      background-color: var(--accent-one);
+      border-radius: 25px;
     }
 
     .form{
@@ -117,8 +126,7 @@ function loginSubmitted(): void {
     }
 
     .submit-button:hover {
-        background-color: var(--accent-two);
-        color: var(--third-color);
+        background-color: #18c16e;
     }
 
     .error-banner {
@@ -133,14 +141,14 @@ function loginSubmitted(): void {
     }
 
     .register-text {
-        color: var(--first-color);
-        margin-top: 2em;
-        font-weight: 600;
+      color: var(--first-color);
+      margin-top: 2em;
+      font-weight: 600;
     }
 
     .register-link {
-        color: var(--accent-one);
-        text-decoration: none;
+      color: var(--accent-one);
+      text-decoration: none;
     }
 
 </style>

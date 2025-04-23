@@ -8,20 +8,32 @@
         label="Name"
     ></v-text-field>
 
-    <v-menu v-model="menu" class="input-field" :close-on-content-click="false">
+    <v-menu
+        v-model="menu"
+        class="date-picker-menu"
+        :close-on-content-click="false"
+        transition="scale-transition"
+        offset-y
+    >
       <template #activator="{ props }">
         <v-text-field
             v-bind="props"
             v-model="formattedDate"
             :error-messages="birthday.errorMessage.value"
-            label="Date of birth"
+            label="Date of Birth"
             readonly
+            outlined
+            dense
+            class="date-picker-text-field"
         ></v-text-field>
       </template>
       <v-date-picker
           v-model="selectedDate"
           @update:model-value="updateDate"
           :type="'date'"
+          class="date-picker"
+          show-current
+          color="primary"
       ></v-date-picker>
     </v-menu>
 
@@ -259,10 +271,10 @@ const submit = handleSubmit(values => {
   width: 80%;
   height: 3em;
   margin: 1em 0;
-  border: 1px solid #808080;
   border-radius: 5px;
   background-color: var(--accent-one);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  color: var(--first-color);
   font-weight: 600;
 }
 
@@ -288,6 +300,34 @@ const submit = handleSubmit(values => {
 .input-field {
   width: 80%;
   padding: 2px;
+}
+
+.date-picker-menu {
+  width: 80%;
+  max-width: 400px;
+}
+
+.date-picker-text-field {
+  width: 80%;
+}
+
+.date-picker {
+  width: 80%;
+  max-width: 400px;
+  font-size: 1rem;
+}
+
+.date-picker .v-date-picker-header {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.date-picker .v-date-picker-table {
+  font-size: 1rem;
+}
+
+.date-picker .v-btn {
+  font-size: 0.9rem;
 }
 
 .v-menu .input-field {

@@ -1,17 +1,17 @@
 <template>
   <main class="register-container">
     <div class="form-container">
-      <span class="title">Registration</span>
-      <div class="line">
-        <span class="text">Create your MNG Events account to access this new experience</span>
+      <div class="registration-upper">
+        <span class="title">Registration</span>
+        <div class="line">
+          <span class="text">Create your MNG Events account to access this new experience</span>
+        </div>
       </div>
       <RegisterFormComponent @signUpSubmitted="handleSignUp"/>
-      <div class="login-link-container">
-            <span class="text"
-            >Already a member?
-              <router-link to="/" class="text login-link">Login Now</router-link>
-            </span>
-      </div>
+      <span class="login-text">
+                    Already a member?
+                    <router-link to="/login" class="login-link">Login Now</router-link>
+      </span>
     </div>
   </main>
 </template>
@@ -43,7 +43,6 @@ const handleSignUp = async (data: { authUser: AuthUser, password: string, userPr
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
     height: 70em;
   }
   .form-container {
@@ -52,11 +51,6 @@ const handleSignUp = async (data: { authUser: AuthUser, password: string, userPr
     border-radius: 10px; /* Bordes redondeados */
     background-color: #f4edea; /* Color de fondo */
 
-  }
-  .login-link-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 1rem;
   }
   span {
     font-size: 2rem;
@@ -67,6 +61,7 @@ const handleSignUp = async (data: { authUser: AuthUser, password: string, userPr
     position: relative;
     font-size: 27px;
     font-weight: 600;
+    margin: 0.5em 0 1em 0;
   }
   .form-container .title::before {
     content: '';
@@ -75,7 +70,7 @@ const handleSignUp = async (data: { authUser: AuthUser, password: string, userPr
     bottom: 0;
     height: 3px;
     width: 30px;
-    background-color: #4070f4;
+    background-color: var(--accent-one);
     border-radius: 25px;
   }
 
@@ -86,14 +81,24 @@ const handleSignUp = async (data: { authUser: AuthUser, password: string, userPr
     font-size: 20px;
   }
 
-  .login-link-container .text {
-    color: #333;
-    font-size: 14px;
+  .registration-upper {
+     margin: 0.5em 0 1em 0;
+   }
+
+  .login-text {
+    color: var(--first-color);
+    margin-top: 2em;
+    font-weight: 600;
+    text-align: center; /* Centra el texto horizontalmente */
+    font-size: 1rem;
+    display: block; /* Asegura que el elemento ocupe todo el ancho disponible */
   }
 
-  .login-link-container .text a {
-    color: #4070f4;
-    font-size: 14px;
+  .login-link {
+    color: var(--accent-one);
+    text-decoration: none;
     font-weight: 600;
+    display: inline-block; /* Permite que el enlace se comporte como un bloque en línea */
+    text-align: center; /* Centra el texto dentro del enlace */
   }
 </style>
