@@ -13,7 +13,7 @@
               <div>
                 <h3 class="event-title">{{ event.name }}</h3>
                 <p class="event-description">{{ event.description }}</p>
-                <p class="event-location">{{ event.location }}</p>
+                <p class="event-location">✦ {{ event.location }}</p>
                 <p class="event-date">
                   {{ new Date(event.celebrationDate).toLocaleString('en-EN', { dateStyle: 'long', timeStyle: 'short' }) }}
                 </p>
@@ -133,5 +133,60 @@ defineProps<{
 
 .no-events {
   color: gray;
+}
+
+.event-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-top: 15px;
+  margin-bottom: 7px;
+  height: 2.5rem; /* altura fija opcional */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.event-description {
+  font-size: 0.825rem;
+  margin-top: 4px;
+  height: 3.6em; /* para 3 líneas aprox */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.event-location, .event-date, .event-price {
+  font-size: 0.825rem;
+  margin-top: 4px;
+  height: 1.5em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.event-location{
+  font-style: italic;
+}
+
+.event-description {
+  font-size: 0.825rem;
+  margin-top: 4px;
+  max-height: 4.8em; /* o píxeles, como 80px */
+  overflow-y: auto;
+  padding-right: 4px; /* espacio para el scroll */
+}
+
+.event-description::-webkit-scrollbar {
+  width: 6px;
+}
+
+.event-description::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.event-description::-webkit-scrollbar-thumb {
+  background-color: rgba(0,0,0,0.3);
+  border-radius: 4px;
 }
 </style>
