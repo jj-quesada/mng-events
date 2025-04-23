@@ -48,37 +48,40 @@
         type="password"
     ></v-text-field>
 
-    <v-select
+    <v-autocomplete
         v-model="country.value.value"
         class="input-field"
         :error-messages="country.errorMessage.value"
         :items="countries"
-        label="Select country"
+        label="Select a country"
         item-title="name"
         item-value="id"
         @update:model-value="updateProvinces"
-    ></v-select>
+        clearable
+    ></v-autocomplete>
 
-    <v-select
+    <v-autocomplete
         v-model="province.value.value"
         class="input-field"
         :error-messages="province.errorMessage.value"
         :items="filteredProvinces"
-        label="Select province"
+        label="Select a province"
         item-title="name"
         item-value="id"
         @update:model-value="updateCities"
-    ></v-select>
+        clearable
+    ></v-autocomplete>
 
-    <v-select
+    <v-autocomplete
         v-model="city.value.value"
         class="input-field"
         :error-messages="city.errorMessage.value"
         :items="filteredCities"
-        label="Select city"
+        label="Select a city"
         item-title="name"
         item-value="id"
-    ></v-select>
+        clearable
+    ></v-autocomplete>
 
     <v-checkbox
         v-model="checkbox.value.value"
@@ -113,7 +116,6 @@ import citiesData from '@/assets/cities.json'
 import {Country, State, City} from '@/interfaces/locations'
 import {AuthUser} from "@supabase/supabase-js";
 import {UserProfile} from "@/interfaces/UserInterfaces";
-
 
 const emit = defineEmits(['signUpSubmitted']);
 
@@ -227,10 +229,14 @@ function updateDate(val: Date | null) {
 const submit = handleSubmit(values => {
   // Create AuthUser and UserProfile objects from the form values
   const authUser: AuthUser = {
-    id: '', // Can be set when the user is created in Supabase
+    id: '', // Puede ser asignado al crear el usuario en Supabase
     email: values.email,
     phone: values.phone,
-  }
+    app_metadata: {}, // Proporciona un objeto vacío o los datos necesarios
+    user_metadata: {}, // Proporciona un objeto vacío o los datos necesarios
+    aud: '', // Proporciona un valor predeterminado
+    created_at: new Date().toISOString(), // Fecha de creación
+  };
 
   const birthDate = new Date(values.birthday);
 
@@ -285,10 +291,6 @@ const submit = handleSubmit(values => {
 }
 
 .v-menu .input-field {
-  width: 100%;
-}
-
-.v-text-field {
   width: 100%;
 }
 
