@@ -19,6 +19,10 @@
 
 <script setup lang="ts">
 import { defineEmits, defineProps } from 'vue';
+import { useAuthStore } from "@/stores/auth";
+import router from '@/router';
+
+    const authStore = useAuthStore();
 
     const props = defineProps<{
         msg: string
@@ -30,12 +34,15 @@ import { defineEmits, defineProps } from 'vue';
         emit('goToEventCreation');
     }
 
-    function logout(): void {
-        // Implement logout logic here
-        console.log('Logout clicked');
-        // For example, you might want to clear user data or redirect to a login page
-        // window.location.href = '/login'; // Redirect to login page
-        // or use Vue Router to navigate
+    async function logout(): Promise<void> {
+      await authStore.signOut(); // Llama al método de logout en el store
+
+      if (!authStore.user) { // Verifica si el usuario ya no está autenticado
+        console.log('Logout exitoso');
+        router.push('/login'); // Redirige al usuario a la página de login
+      } else {
+        console.error('Error al cerrar sesión');
+      }
     }
 
 </script>

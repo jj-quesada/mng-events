@@ -73,6 +73,9 @@ export const useAuthStore = defineStore('auth', () => {
       await supabase.auth.signOut();
       user.value = null;
 
+      // Clear user profile
+      userProfile.value = null;
+
     } catch (err: any) {
       error.value = err.message;
 
