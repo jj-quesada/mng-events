@@ -3,6 +3,7 @@ import { defineStore } from 'pinia';
 import { ref } from 'vue';
 import supabase from '@/supabase';
 import { Event } from '@/interfaces/event';
+import defaultImage from '@/assets/default-image-for-event.svg';
 
 export const useEventStore = defineStore('event', () => {
 
@@ -75,20 +76,29 @@ export const useEventStore = defineStore('event', () => {
     error.value = null;
 
     try {
-      var imageURL = ""
-      const filePath = `event-images/${eventData.ownerId}_${eventData.name}_${Date.now()}`;
-      console.log(filePath);
+      var imageURL = defaultImage;
+
+      // const filePath = `event-images/${eventData.ownerId}_${eventData.name}_${Date.now()}`;
+      // console.log(filePath);
 
       if(image) {
+
+        const filePath = `event-images/${eventData.ownerId}_${eventData.name}_${Date.now()}`;
+        console.log(filePath);
+
         const { error: uploadError } = await supabase.storage
-        .from('event-images') 
+        .from('event-images')
         .upload(filePath, image);
-  
-        if (uploadError) throw uploadError;
+
+        if (uploadError) throw new Error(`Error al subir la imagen: ${uploadError.message}`);
 
         const { data: publicUrlData } = supabase.storage
-          .from('event-images')
-          .getPublicUrl(filePath);
+            .from('event-images')
+            .getPublicUrl(filePath);
+
+        if (!publicUrlData?.publicUrl) {
+          throw new Error('No se pudo obtener la URL pública de la imagen.');
+        }
 
         imageURL = publicUrlData.publicUrl;
       }
@@ -110,11 +120,12 @@ export const useEventStore = defineStore('event', () => {
             }
           ]);
 
-      if (insertError) throw insertError;
+      if (insertError) throw new Error(`Error al insertar el evento: ${insertError.message}`);
       await fetchEvents(); // refresh
 
     } catch (err: any) {
       error.value = err.message;
+      console.error(err.message);
       throw err;
 
     } finally {
