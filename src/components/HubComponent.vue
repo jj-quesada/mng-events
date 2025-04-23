@@ -9,7 +9,7 @@
       <div class="events" v-if="events.length > 0">
         <router-link v-for="(event, index) in events" :key="index" :to="{ name: 'event-details', params: { id: event.id },  }" class="event-card">
           <div class="event-info">
-              <img :src="event.imageURL" alt="Event Image" class="event-image" />
+              <img :src="event.imageURL || defaultImage" alt="Event Image" class="event-image" />
               <div>
                 <h3 class="event-title">{{ event.name }}</h3>
                 <p class="event-description">{{ event.description }}</p>
@@ -28,6 +28,7 @@
 
 <script setup lang="ts">
 import { Event } from '@/interfaces/event'
+import defaultImage from '@/assets/default-image-for-event.svg';
 
 defineProps<{
   events: Event[]

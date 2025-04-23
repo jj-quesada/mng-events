@@ -26,7 +26,7 @@
                         type="number"
                         label="Price"
                         class="field price-field"
-                        placeholder="Price"
+                        placeholder="Price (in €)"
                     />
                 </section>
 
@@ -36,22 +36,56 @@
                     class="field description-field"
                 />
 
-                <v-text-field
-                    v-model="location"
-                    label="Location"
-                    class="field price-field"
-                    placeholder="Location"
-                />
+              <section class="location-selects">
+                <v-autocomplete
+                    v-model="country.value.value"
+                    class="input-field country-select"
+                    :error-messages="country.errorMessage.value"
+                    :items="countries"
+                    label="Select a country"
+                    item-title="name"
+                    item-value="id"
+                    @update:model-value="updateProvinces"
+                    clearable
+                ></v-autocomplete>
+
+                <v-autocomplete
+                    v-model="province.value.value"
+                    class="input-field province-select"
+                    :error-messages="province.errorMessage.value"
+                    :items="filteredProvinces"
+                    label="Select a province"
+                    item-title="name"
+                    item-value="id"
+                    @update:model-value="updateCities"
+                    clearable
+                ></v-autocomplete>
+
+                <v-autocomplete
+                    v-model="city.value.value"
+                    class="input-field location-select"
+                    :error-messages="city.errorMessage.value"
+                    :items="filteredCities"
+                    label="Select a location"
+                    item-title="name"
+                    item-value="id"
+                    clearable
+                ></v-autocomplete>
+              </section>
 
                 <section class="date-time">
                     <v-text-field
                         v-model="date"
                         type="date"
+                        :min="currentDate"
+                        label="Select a date"
                     ></v-text-field>
     
                     <v-text-field
                         v-model="time"
                         type="time"
+                        :min="isToday ? currentTime : null"
+                        label="Select a time"
                     ></v-text-field>
                 </section>
 
@@ -82,54 +116,117 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
+import { useAuthStore } from '@/stores/auth';
 import { Event } from '@/interfaces/event';
+import {City, Country, State} from "@/interfaces/locations";
+import countriesData from '@/assets/countries.json'
+import statesData from '@/assets/states.json'
+import citiesData from '@/assets/cities.json'
+import {useField} from "vee-validate";
+
+import defaultImage from '@/assets/default-image-for-event.svg';
+
+    const authStore = useAuthStore();
 
     const eventName = ref<string>('');
     const maximumAttendees = ref<string>('');
     const description = ref<string>('');
     const date = ref<string>('');
     const time = ref<string>('');
+
+    const now = new Date();
+    const currentDate = ref(now.toISOString().split('T')[0]);
+    const currentTime = ref(now.toTimeString().split(':').slice(0, 2).join(':'));
+    const isToday = computed(() => date.value === currentDate.value);
+
     const realDate = ref<Date>(new Date());
     const price = ref<string>('');
-    const location = ref<string>('');
+    // const location = ref<string>(''); transform to city
+
+    const country = useField<string>('country')
+    const province = useField<string>('province')
+    const city = useField<string>('city')
+
     const privateEvent = ref<boolean>(false);
-    
     const images = ref<File | undefined>(undefined);
+
+    const filteredProvinces = ref<State[]>([])
+    const filteredCities = ref<City[]>([])
+
+    const countries: Country[] = countriesData[2]?.data || []
+    const states: State[] = statesData[2]?.data || []
+    const cities: City[] = citiesData[2]?.data || []
+
+    function updateProvinces(countryId: string) {
+      // Filter provinces based in countryId
+      filteredProvinces.value = states.filter(state => state.countryId === countryId)
+      if (filteredProvinces.value.length === 0) {
+        province.value.value = 'No provinces available'
+        city.value.value = 'No cities available'
+      }
+      province.value.value = ''
+      city.value.value = ''
+    }
+
+    function updateCities(stateId: string) {
+      // Filter cities based in stateId
+      filteredCities.value = cities.filter(city => city.stateId === stateId)
+      if (filteredCities.value.length === 0) {
+        city.value.value = 'No cities available'
+      }
+      city.value.value = ''
+    }
 
     const emit = defineEmits(['eventCreated']);
 
+    function validateFields() {
+        if (!eventName.value || !maximumAttendees.value || !city.value ||
+            !description.value || !date.value || !time.value || !price.value) {
+            console.error('Please fill in all fields');
+            return false;
+        }
+        return true;
+    }
+
+    function parseDateTime(date: string, time: string): Date {
+        const [year, month, day] = date.split('-').map(Number);
+        const [hours, minutes] = time.split(':').map(Number);
+        const parsedDate = new Date(year, month - 1, day, hours, minutes);
+        return parsedDate;
+    }
+
     function eventSubmitted() {
 
-        if (!eventName.value || !maximumAttendees.value || !location.value || !description.value || !date.value || !time.value || !price.value) {
-            console.error('Please fill in all fields');
+        if (!validateFields()) {
             return;
         }
-        
-        const timeGroup : string[] = time.value.split(':');
-        const dateGroup : string[] = date.value.split('-');
 
-        realDate.value.setFullYear(parseInt(dateGroup[0]), parseInt(dateGroup[1]), parseInt(dateGroup[2]));
-        realDate.value.setHours(parseInt(timeGroup[0]));
-        realDate.value.setMinutes(parseInt(timeGroup[1]));
+        const celebrationDate = parseDateTime(date.value, time.value);
+
+      //const timeGroup : string[] = time.value.split(':');
+      //const dateGroup : string[] = date.value.split('-');
+
+      //realDate.value.setFullYear(parseInt(dateGroup[0]), parseInt(dateGroup[1]), parseInt(dateGroup[2]));
+      //realDate.value.setHours(parseInt(timeGroup[0]));
+      //realDate.value.setMinutes(parseInt(timeGroup[1]));
 
         const event: Event = {
-            id: crypto.randomUUID(),
-            name: eventName.value,
-            maximumAttendees: parseInt(maximumAttendees.value),
-            description: description.value,
-            creationTime: realDate.value,
-            price: parseFloat(price.value),
-            location: location.value,
-            celebrationDate: realDate.value,
-            privateEvent: privateEvent.value,
-            imageFile: images.value ? images.value.name : undefined
+          id: crypto.randomUUID(),
+          ownerId: authStore.user?.id || 'unknown', // Obtén el ownerId del authStore
+          name: eventName.value,
+          maximumAttendees: parseInt(maximumAttendees.value),
+          description: description.value,
+          creationTime: new Date(),
+          price: parseFloat(price.value),
+          location: filteredCities.value.find(city => city.id === city.id)?.name || '',
+          celebrationDate,
+          privateEvent: privateEvent.value,
+          imageURL: images.value ? URL.createObjectURL(images.value) : defaultImage
         };
 
       emit('eventCreated', event);
-
       console.log('Event created', event);
-
     }
   
 </script>
@@ -212,5 +309,23 @@ import { Event } from '@/interfaces/event';
 
     .submit-button:hover {
         background-color: var(--accent-two);
+    }
+
+    .location-selects {
+      display: flex;
+      gap: 1em;
+      width: 100%;
+    }
+
+    .country-select {
+      flex: 1;
+    }
+
+    .province-select {
+      flex: 1;
+    }
+
+    .location-select {
+      flex: 1;
     }
 </style>
