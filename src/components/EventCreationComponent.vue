@@ -56,7 +56,7 @@
                 </section>
 
                 <v-file-input
-                    v-model="image"
+                    v-model="images"
                     accept="image/*"
                     label="Upload an image for the event"
                 />
@@ -85,10 +85,6 @@
 import { ref } from 'vue';
 import { Event } from '@/interfaces/event';
 
-    const props = defineProps<{
-        userId: string
-    }>()
-
     const eventName = ref<string>('');
     const maximumAttendees = ref<string>('');
     const description = ref<string>('');
@@ -99,11 +95,9 @@ import { Event } from '@/interfaces/event';
     const location = ref<string>('');
     const privateEvent = ref<boolean>(false);
     
-    const image = ref<File | undefined>(undefined);
+    const images = ref<File | undefined>(undefined);
 
-    const emit = defineEmits<{
-        (e: 'eventCreated', event: Event, image: File | undefined): void
-    }>()
+    const emit = defineEmits(['eventCreated']);
 
     function eventSubmitted() {
 
@@ -120,19 +114,21 @@ import { Event } from '@/interfaces/event';
         realDate.value.setMinutes(parseInt(timeGroup[1]));
 
         const event: Event = {
-            ownerId: props.userId,
+            id: crypto.randomUUID(),
             name: eventName.value,
             maximumAttendees: parseInt(maximumAttendees.value),
             description: description.value,
-            celebrationDate: realDate.value,
+            creationTime: realDate.value,
             price: parseFloat(price.value),
             location: location.value,
+            celebrationDate: realDate.value,
             privateEvent: privateEvent.value,
+            imageFile: images.value ? images.value.name : undefined
         };
 
-      emit('eventCreated', event, image.value);
+      emit('eventCreated', event);
 
-      console.log('Event created', event );
+      console.log('Event created', event);
 
     }
   
