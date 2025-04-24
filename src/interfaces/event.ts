@@ -2,6 +2,7 @@ export interface Event {
     id?: string,
     creationTime?: Date,
     ownerId: string,
+    ownerName?: string,
     name: string,
     maximumAttendees: number,
     description: string,

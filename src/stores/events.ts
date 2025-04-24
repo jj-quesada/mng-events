@@ -55,12 +55,20 @@ export const useEventStore = defineStore('event', () => {
     try {
       const { data, error: fetchError } = await supabase
           .from('events')
-          .select('*')
+          .select(`
+          *,
+          user_profiles(username)
+        `)
           .eq('id', eventId)
           .single();
 
       if (fetchError) throw fetchError;
-      selectedEvent.value = data;
+
+      selectedEvent.value = {
+        ...data,
+        ownerName: data.user_profiles?.username || 'Unknown user',
+        celebrationDate: new Date(data.celebration_date.replace(' ', 'T')) // Conversión explícita
+      };
 
     } catch (err: any) {
       error.value = err.message;
