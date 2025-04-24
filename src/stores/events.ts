@@ -91,7 +91,7 @@ export const useEventStore = defineStore('event', () => {
 
       if(image) {
 
-        const filePath = `event-images/${eventData.ownerId}_${eventData.name}_${Date.now()}`;
+        const filePath = `event-images/${eventData.ownerId}_${Date.now()}`;
         console.log(filePath);
 
         const { error: uploadError } = await supabase.storage
