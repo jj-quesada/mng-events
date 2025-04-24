@@ -19,6 +19,7 @@
               label="Maximum Attendees"
               class="field maxAtt-field"
               placeholder="Maximum Attendees"
+              @input="validateMaximumAttendees"
           />
 
           <v-text-field
@@ -27,6 +28,7 @@
               label="Price"
               class="field price-field"
               placeholder="Price (in €)"
+              @input="validatePrice"
           />
         </section>
 
@@ -161,24 +163,40 @@ const countries: Country[] = countriesData[2]?.data || []
 const states: State[] = statesData[2]?.data || []
 const cities: City[] = citiesData[2]?.data || []
 
-function updateProvinces(countryId: string) {
-  // Filter provinces based in countryId
-  filteredProvinces.value = states.filter(state => state.countryId === countryId)
-  if (filteredProvinces.value.length === 0) {
-    province.value.value = 'No provinces available'
-    city.value.value = 'No cities available'
+function validateMaximumAttendees(value: string) {
+  const numericValue = parseInt(value, 10);
+  if (numericValue < 0) {
+    maximumAttendees.value = '0'; // Establece el valor a 0 si es negativo
   }
-  province.value.value = ''
-  city.value.value = ''
+}
+
+function validatePrice(value: string) {
+  const numericValue = parseFloat(value);
+  if (numericValue < 0) {
+    price.value = '0';
+  }
+}
+
+function updateProvinces(countryId: string) {
+  // Filtrar provincias basadas en el countryId
+  filteredProvinces.value = states.filter(state => state.countryId === countryId);
+  if (filteredProvinces.value.length === 0) {
+    province.value.value = 'No provinces available'; // Accede a .value correctamente
+    city.value.value = 'No cities available';       // Accede a .value correctamente
+  } else {
+    province.value.value = ''; // Reinicia el valor
+    city.value.value = '';     // Reinicia el valor
+  }
 }
 
 function updateCities(stateId: string) {
-  // Filter cities based in stateId
-  filteredCities.value = cities.filter(city => city.stateId === stateId)
+  // Filtrar ciudades basadas en el stateId
+  filteredCities.value = cities.filter(city => city.stateId === stateId);
   if (filteredCities.value.length === 0) {
-    city.value.value = 'No cities available'
+    city.value.value = 'No cities available'; // Accede a .value correctamente
+  } else {
+    city.value.value = ''; // Reinicia el valor
   }
-  city.value.value = ''
 }
 
 function validateFields() {
@@ -206,6 +224,9 @@ function eventSubmitted() {
   }
 
   const celebrationDate = parseDateTime(date.value, time.value);
+  // Encuentra la ciudad seleccionada usando el ID almacenado en city.value
+  const selectedCity = filteredCities.value.find(cityItem => cityItem.id === city.value.value);
+  const cityName = selectedCity ? selectedCity.name : 'Not specified';
 
   const eventData: Event = {
     id: crypto.randomUUID(),
@@ -215,7 +236,7 @@ function eventSubmitted() {
     description: description.value,
     creationTime: new Date(),
     price: parseFloat(price.value),
-    location: city.value.value,
+    location: cityName,
     celebrationDate: celebrationDate,
     privateEvent: privateEvent.value,
   };
@@ -267,6 +288,17 @@ function eventSubmitted() {
 
 .field::placeholder {
   color: var(--third-color);
+}
+
+/* Eliminar las flechas de los inputs de número */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield; /* Para Firefox */
 }
 
 .description-field {
