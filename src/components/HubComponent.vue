@@ -155,9 +155,7 @@ defineProps<{
 .event-description {
   font-size: 0.825rem;
   margin-top: 4px;
-  height: 3.6em; /* para 3 líneas aprox */
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
+  height: 3.6em;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
