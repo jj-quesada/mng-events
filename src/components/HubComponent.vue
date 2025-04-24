@@ -133,6 +133,12 @@ defineProps<{
 
 .no-events {
   color: gray;
+
+  align-content: center;
+  justify-self: center;
+  text-align: center;
+
+  height: 5em;
 }
 
 .event-title {

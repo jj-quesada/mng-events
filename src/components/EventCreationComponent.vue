@@ -92,7 +92,7 @@
         </section>
 
         <v-file-input
-            v-model="images"
+            v-model="image"
             accept="image/*"
             label="Upload an image for the event"
         />
@@ -129,8 +129,6 @@ import {useAuthStore} from '@/stores/auth';
 import {useEventStore} from '@/stores/events';
 
 
-import defaultImage from '@/assets/default-image-for-event.svg';
-
 const authStore = useAuthStore();
 const eventStore = useEventStore();
 
@@ -147,14 +145,13 @@ const isToday = computed(() => date.value === currentDate.value);
 
 const realDate = ref<Date>(new Date());
 const price = ref<string>('');
-// const location = ref<string>(''); transform to city
 
 const country = useField<string>('country')
 const province = useField<string>('province')
 const city = useField<string>('city')
 
 const privateEvent = ref<boolean>(false);
-const images = ref<File | undefined>(undefined);
+const image = ref<File | undefined>(undefined);
 
 const filteredProvinces = ref<State[]>([])
 const filteredCities = ref<City[]>([])
@@ -215,7 +212,9 @@ function parseDateTime(date: string, time: string): Date {
   return parsedDate;
 }
 
-const emit = defineEmits(['eventCreated']);
+const emit = defineEmits<{
+  (e: 'eventCreated', eventData: Event, image: File | undefined): void
+}>()
 
 function eventSubmitted() {
 
@@ -241,9 +240,7 @@ function eventSubmitted() {
     privateEvent: privateEvent.value,
   };
 
-  eventStore.createEvent(eventData, images.value);
-  emit('eventCreated', eventData); // Notifica al componente padre
-  console.log('Event created', eventData);
+  emit('eventCreated', eventData, image.value); 
 }
 
 </script>

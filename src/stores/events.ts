@@ -3,7 +3,6 @@ import { defineStore } from 'pinia';
 import { ref } from 'vue';
 import supabase from '@/supabase';
 import { Event } from '@/interfaces/event';
-import defaultImage from '@/assets/default-image-for-event.svg';
 
 export const useEventStore = defineStore('event', () => {
 
@@ -76,7 +75,7 @@ export const useEventStore = defineStore('event', () => {
     error.value = null;
 
     try {
-      var imageURL = defaultImage;
+      var imageURL = '';
 
       // const filePath = `event-images/${eventData.ownerId}_${eventData.name}_${Date.now()}`;
       // console.log(filePath);
