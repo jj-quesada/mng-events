@@ -67,7 +67,8 @@ export const useEventStore = defineStore('event', () => {
       selectedEvent.value = {
         ...data,
         ownerName: data.user_profiles?.username || 'Unknown user',
-        celebrationDate: new Date(data.celebration_date.replace(' ', 'T')) // Conversión explícita
+        celebrationDate: new Date(data.celebration_date.replace(' ', 'T')),
+        imageURL: data.image_url || undefined
       };
 
     } catch (err: any) {
